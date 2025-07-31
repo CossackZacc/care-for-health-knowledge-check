@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CARE for Health Quiz</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f8ff;
+      color: #003057;
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      color: #0073cf;
+    }
+    .question {
+      margin-bottom: 2rem;
+      padding: 1rem;
+      border-left: 5px solid #0073cf;
+      background: #fff;
+      border-radius: 5px;
+    }
+    .answers button {
+      display: block;
+      margin: 0.5rem 0;
+      padding: 0.6rem 1rem;
+      border: none;
+      border-radius: 4px;
+      background-color: #e6f0fa;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.3s ease;
+      width: 100%;
+    }
+    .correct {
+      background-color: #d4f4dd !important;
+      color: #007a50;
+    }
+    .incorrect {
+      background-color: #fbdada !important;
+      color: #b00020;
+    }
+    .feedback {
+      font-weight: bold;
+      margin-top: 0.5rem;
+    }
+    .icon {
+      margin-right: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🧠 CARE for Health Knowledge Check</h1>
+  <p>Answer these quick questions to test your knowledge of the new NIH initiative!</p>
+
+  <div class="question" data-correct="1">
+    <p><strong>1. What is the main goal of the CARE for Health initiative?</strong></p>
+    <div class="answers">
+      <button onclick="checkAnswer(this, false)">🎯 Expand medical billing systems nationwide</button>
+      <button onclick="checkAnswer(this, true)">🌍 Integrate clinical research into community-based primary care</button>
+      <button onclick="checkAnswer(this, false)">🧬 Focus exclusively on rare disease treatments</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-correct="2">
+    <p><strong>2. Who are the key communities CARE for Health aims to include?</strong></p>
+    <div class="answers">
+      <button onclick="checkAnswer(this, false)">🏙️ Urban professionals in biotech startups</button>
+      <button onclick="checkAnswer(this, false)">🎓 College research faculty only</button>
+      <button onclick="checkAnswer(this, true)">🏡 Rural residents, underserved populations, and older adults</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-correct="0">
+    <p><strong>3. When are the first CARE for Health funding awards expected?</strong></p>
+    <div class="answers">
+      <button onclick="checkAnswer(this, true)">🍂 Fall 2024</button>
+      <button onclick="checkAnswer(this, false)">🌸 Spring 2026</button>
+      <button onclick="checkAnswer(this, false)">☀️ Summer 2025</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <script>
+    function checkAnswer(button, isCorrect) {
+      const buttons = button.parentElement.querySelectorAll("button");
+      buttons.forEach(btn => btn.disabled = true);
+
+      if (isCorrect) {
+        button.classList.add("correct");
+        button.innerHTML = "✅ " + button.innerHTML;
+        button.parentElement.nextElementSibling.textContent = "Correct!";
+        button.parentElement.nextElementSibling.style.color = "#007a50";
+      } else {
+        button.classList.add("incorrect");
+        button.innerHTML = "❌ " + button.innerHTML;
+        button.parentElement.nextElementSibling.textContent = "Oops! Not quite.";
+        button.parentElement.nextElementSibling.style.color = "#b00020";
+
+        const parent = button.parentElement;
+        const correctIndex = parseInt(parent.parentElement.getAttribute("data-correct"));
+        const correctButton = parent.querySelectorAll("button")[correctIndex];
+        correctButton.classList.add("correct");
+        correctButton.innerHTML = "✅ " + correctButton.innerHTML;
+      }
+    }
+  </script>
+
+</body>
+</html>
